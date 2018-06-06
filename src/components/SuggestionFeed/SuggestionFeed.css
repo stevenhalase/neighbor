@@ -1,0 +1,19 @@
+.SuggestionFeed {
+  width: 100%;
+  padding: 15px;
+  display: flex;
+}
+
+.SuggestionFeed-card {
+  margin-right: 15px;
+}
+
+.SuggestionFeed-card-description {
+  margin-bottom: 15px!important;
+}
+
+.SuggestionFeed-card-tag {
+  font-size: 10px!important;
+  height: 25px!important;
+  margin-right: 5px!important;
+}
