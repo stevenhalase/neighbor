@@ -5,9 +5,11 @@ import CardContent from '@material-ui/core/CardContent';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import Chip from '@material-ui/core/Chip';
+import Badge from '@material-ui/core/Badge';
 
 import './SuggestionFeed.css';
 import FeedService from './../../services/FeedService';
+import Comments from './../Comments/Comments';
 
 class SuggestionFeed extends Component {
 
@@ -18,29 +20,36 @@ class SuggestionFeed extends Component {
     }
   }
 
-  render() {
+  render = () => {
     return (
       <div className="SuggestionFeed">
         {
           this.state.feed.map((item, ind) => {
+            let childCommentsRef = React.createRef();
+            let image = `url(${item.image})`;
             return (
               <Card key={ind} className="SuggestionFeed-card">
                 <CardContent>
-                  <Typography color="textSecondary">
-                    Suggested Topic
-                  </Typography>
-                  <Typography color="textSecondary">
-                    {item.date.toLocaleDateString()}
-                  </Typography>
-                  <Typography variant="headline" component="h2">
-                    {item.title}
-                  </Typography>
-                  <Typography color="textSecondary">
-                    {item.user.name}
-                  </Typography>
-                  <Typography component="p" className="SuggestionFeed-card-description">
-                    {item.description}
-                  </Typography>
+                  <div className="SuggestionFeed-card-container">
+                    <div className="SuggestionFeed-card-content">
+                      <Typography color="textSecondary">
+                        Suggested Topic
+                      </Typography>
+                      <Typography color="textSecondary">
+                        {item.date.toLocaleDateString()}
+                      </Typography>
+                      <Typography variant="headline" component="h2">
+                        {item.title}
+                      </Typography>
+                      <Typography color="textSecondary">
+                        {item.user.name}
+                      </Typography>
+                      <Typography component="p" className="SuggestionFeed-card-description">
+                        {item.description}
+                      </Typography>
+                    </div>
+                    <div className="SuggestionFeed-card-image" style={{ backgroundImage: image }}></div>
+                  </div>
                   <div className="SuggestionFeed-card-tags">
                     {
                       item.tags.map((tag, ind) => {
@@ -49,9 +58,18 @@ class SuggestionFeed extends Component {
                     }
                   </div>
                 </CardContent>
-                <CardActions>
-                  <Button size="small">Learn More</Button>
+                <CardActions className="SuggestionFeed-card-actions">
+                  <div>
+                    <Badge badgeContent={item.comments.length} color="primary">
+                      <Button variant="outlined" size="small" onClick={() => childCommentsRef.current.toggle()}>Comments</Button>
+                    </Badge>
+                  </div>
+                  <div>
+                    <Button size="small">Volunteer</Button>
+                    <Button size="small">Host</Button>
+                  </div>
                 </CardActions>
+                <Comments comments={item.comments} ref={childCommentsRef} />
               </Card>
             )
           })

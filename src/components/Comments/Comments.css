@@ -1,0 +1,17 @@
+.Comments {
+
+}
+
+.Comments-list {
+  height: 0;
+}
+
+.Comments-list-open {
+  height: auto;
+}
+
+.Comments-list-avatar {
+  width: 25px!important;
+  height: 25px!important;
+  font-size: 12px!important;
+}
