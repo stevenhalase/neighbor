@@ -26,12 +26,12 @@ class Comments extends Component {
                 <ListItem key={ind}>
                   <ListItemAvatar>
                     <Avatar className="Comments-list-avatar">
-                      {comment.user.name.replace(/[^a-zA-Z- ]/g, "").match(/\b\w/g).join('')}
+                      {comment.User.Name.replace(/[^a-zA-Z- ]/g, "").match(/\b\w/g).join('')}
                     </Avatar>
                   </ListItemAvatar>
                   <ListItemText
-                    primary={comment.text}
-                    secondary={new Date(comment.date).toLocaleString()}
+                    primary={comment.Text}
+                    secondary={new Date(comment.Date).toLocaleString()}
                   />
                 </ListItem>
               )

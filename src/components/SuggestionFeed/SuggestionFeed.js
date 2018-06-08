@@ -16,8 +16,18 @@ class SuggestionFeed extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      feed: FeedService.GetSuggestionFeed()
+      feed: []
     }
+  }
+
+  componentWillMount() {
+    FeedService.GetSuggestionFeed()
+      .then(feed => {
+        this.setState({ feed });
+      })
+      .catch(error => {
+        console.log(error);
+      });
   }
 
   render = () => {
@@ -26,7 +36,7 @@ class SuggestionFeed extends Component {
         {
           this.state.feed.map((item, ind) => {
             let childCommentsRef = React.createRef();
-            let image = `url(${item.image})`;
+            let image = `url(${item.Image.Url})`;
             return (
               <Card key={ind} className="SuggestionFeed-card">
                 <CardContent>
@@ -36,31 +46,31 @@ class SuggestionFeed extends Component {
                         Suggested Topic
                       </Typography>
                       <Typography color="textSecondary">
-                        {item.date.toLocaleDateString()}
+                        {new Date(item.Date).toLocaleDateString()}
                       </Typography>
                       <Typography variant="headline" component="h2">
-                        {item.title}
+                        {item.Title}
                       </Typography>
                       <Typography color="textSecondary">
-                        {item.user.name}
+                        {item.User.Name}
                       </Typography>
                       <Typography component="p" className="SuggestionFeed-card-description">
-                        {item.description}
+                        {item.Description}
                       </Typography>
                     </div>
                     <div className="SuggestionFeed-card-image" style={{ backgroundImage: image }}></div>
                   </div>
                   <div className="SuggestionFeed-card-tags">
                     {
-                      item.tags.map((tag, ind) => {
-                        return <Chip label={tag} className="SuggestionFeed-card-tag" key={ind} />
+                      item.Tags.map((tag, ind) => {
+                        return <Chip label={tag.Text} className="SuggestionFeed-card-tag" key={ind} />
                       })
                     }
                   </div>
                 </CardContent>
                 <CardActions className="SuggestionFeed-card-actions">
                   <div>
-                    <Badge badgeContent={item.comments.length} color="primary">
+                    <Badge badgeContent={item.Comments.length} color="primary">
                       <Button variant="outlined" size="small" onClick={() => childCommentsRef.current.toggle()}>Comments</Button>
                     </Badge>
                   </div>
@@ -69,7 +79,7 @@ class SuggestionFeed extends Component {
                     <Button size="small">Host</Button>
                   </div>
                 </CardActions>
-                <Comments comments={item.comments} ref={childCommentsRef} />
+                <Comments comments={item.Comments} ref={childCommentsRef} />
               </Card>
             )
           })
