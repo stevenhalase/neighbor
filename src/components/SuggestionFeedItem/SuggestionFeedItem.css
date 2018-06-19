@@ -1,0 +1,36 @@
+.SuggestionFeedItem-card {
+  margin-bottom: 15px;
+  width: 100%;
+}
+
+.SuggestionFeedItem-card-container {
+  display: flex;
+  margin: 20px 0;
+}
+
+.SuggestionFeedItem-card-content {
+  flex: 0 0 50%;
+}
+
+.SuggestionFeedItem-card-image {
+  flex: 0 0 50%;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  border-radius: 3px;
+}
+
+.SuggestionFeedItem-card-description {
+  margin-bottom: 15px!important;
+}
+
+.SuggestionFeedItem-card-tag {
+  font-size: 10px!important;
+  height: 25px!important;
+  margin-right: 5px!important;
+}
+
+.SuggestionFeedItem-card-actions {
+  display: flex;
+  justify-content: space-between;
+}
